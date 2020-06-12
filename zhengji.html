@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+		<meta name="format-detection" content="email=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="keywords" content="尚亦城">
+		<meta name="Description" content="尚亦城">
+		<title>尚亦城</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="css/style1.css"/>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/IPurl.js"></script>
+		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/layer/layer.js"></script>
+		<script src="js/video/TcPlayer-2.3.2.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div v-if="datas" id="body"  class="wrap" :class="type==1?'wrap1':''" :style="{backgroundImage:  datas.backgroupCover? 'url('+datas.backgroupCover+')':'url(images/bg_01.png)',backgroundColor: datas.backgroupColor }">
+			<!-- <div class="H_banner" :style="'background-image: url('+datas.titleCover+');'"></div> -->
+			<img v-if="datas.titleCover" class="H_banner" :src="datas.titleCover" alt="">
+			<div v-show="datas.videoPath" class="sp_box" >
+				<!-- <div class="dis_flex aic ju_c sp_zcz" @click="play111(this,datas.videoPath)"><img src="images/play.png" alt=""></div> -->
+				<div id="H_video"></div>
+				
+			</div>
+			<div class="huodong_xz">活动须知</div>
+			<div class="xz_main">
+				1. 活动时间：{{getTime(datas.startTime)}}—{{getTime(datas.endTime)}}（在活动时间内，活动资源送完则活动自动结束）； 
+				<br>2. 参与方式：在“评选活动”中点击报名即可参赛； 
+				<br>3. 活动规则：{{datas.rule}} 
+				<br>4. 活动奖品：参赛中奖概率为100%
+				<br>5.活动更多规则详询尚亦城客服。
+			</div>
+			<div class="huodong_xz">发布征集</div>
+			<div class="w100">
+				<div v-if="datas.userList" class="zhengji_li dis_flex" v-for="(item,index) in datas.userList">
+					<img class="zj_tx" :src="item.userPhoto" alt="">
+					<div class="zj_main flex_1 dis_flex">
+						<div class=" dis_flex p1 aic ju_b mb15">
+							<span  v-html="item.userName"></span>
+							<em v-html="item.createDate"></em>
+						</div>
+						<div class="w100" v-for="(a,a_idx) in getpxinr(item.answerList)">
+							<div v-if="a.type=='text'||a.type=='select'&&a.content!=''" class="p2" v-html="a.content"></div>
+							<div v-if="a.type=='image'&&getarr(a.content,',')" class="w100 img_box dis_flex" >
+								<div v-if="item1" v-for="(item1,index1) in getarr(a.content,',')" class="img" :style="'background-image: url('+item1+');'" :alt="item1" :title="item1"></div>
+							</div>
+							<div  v-if="a.type=='sp'&&a.content!=''" class="zj_sp">
+								<!-- <div class="dis_flex aic ju_c sp_zcz"><img src="images/play.png" alt=""></div> -->
+								<video controls="controls" poster="images/video_bg.jpg" :src="a.content" 
+									x5-playsinline="" 
+									playsinline="true" 
+									webkit-playsinline="true" 
+									x-webkit-airplay="true" 
+									x5-video-player-type="h5" 
+									x5-video-player-fullscreen="" 
+									x5-video-orientation="portraint">
+									
+								</video>
+							</div>
+						</div>
+						
+						
+					</div>
+				</div>
+				
+			</div>
+			<div class="bottombox"  :style="{backgroundColor: datas.backgroupColor }">
+				<div v-if="getNowCanshu().isapp!='true'&&getNowCanshu().isapp!=true" class="footer_btn dis_flex" style="color: #F29B76;"  onclick="goapp()">进入尚亦城APP</div>
+				<div v-else class="footer_btn dis_flex"  @click="baoming()">去征集</div>
+			</div>
+		</div>
+<script type="text/javascript">
+	
+var vm = new Vue({
+	el: "#body",
+	data: {
+		type:0,
+		datas:'',
+		
+	},
+	created: function() {
+		if(!getNowCanshu().activityId){
+			layer.msg('缺少活动参数')
+			return
+		}
+		// if(getNowCanshu().type){
+		// 	this.type=getNowCanshu().type
+		// }
+		
+		getdata()
+	},
+	methods: {
+	
+	}
+});		
+function goapp(){
+	submitFn('zhengji.html?isapp=true&activityId='+getNowCanshu().activityId)
+}
+function baoming(){
+	if(getNowCanshu().isapp!='true'&&getNowCanshu().isapp!=true){
+		goapp()
+		return
+	}
+	if(!getNowCanshu().sessionId){
+		layer.msg('请先登录账号')
+		return
+	}
+	var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+	setCookie("body_scroll", scrollTop);
+	window.location.href="baoming.html?isapp=true&activityId="+getNowCanshu().activityId+'&sessionId='+getNowCanshu().sessionId
+}
+function getdata(){
+	//3725754ac22c4857b952cf1e708e35b8
+	var activityId=getNowCanshu().activityId
+	$.ajax({
+		type: "GET",
+		url: IPurl+'/app/activity/getActivityDetail',
+		data: {
+			activityId:activityId
+		},
+		dataType:'json',
+		success: function (res){
+			if(typeof(res)=='string'){
+				res=JSON.parse(res)
+			}
+			if(res.code==200){
+				vm.datas=res.data
+				vm.type=res.data.templateType
+				console.log(res)
+				setTimeout(function (){
+					var body_scroll=getCookie('body_scroll')
+					window.scrollTo(0, body_scroll); 
+					setCookie("body_scroll", 0);
+					if(res.data.videoPath){
+						var player = new TcPlayer('H_video', {
+						"m3u8": res.data.videoPath, //请替换成实际可用的播放地址
+						"autoplay" : true,      //iOS 下 safari 浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+						"poster" : res.data.spCover,
+						"width" :  '100%',//视频的显示宽度，请尽量使用视频分辨率宽度
+						"height" : 'auto'//视频的显示高度，请尽量使用视频分辨率高度
+						});
+					}
+				},10)
+			}else{
+				if(res.data){
+					layer.msg(res.data)
+				}else{
+					layer.msg('获取数据失败')
+				}
+			}
+					  
+						  
+		
+			// vm.datas.videoPath='http://101.201.70.194:8888//201912191444389197/index.m3u8'
+			// vm.datas.videoPath='http://tb-video.bdstatic.com/tieba-smallvideo-transcode-crf/2446331_fc637b3caec2c99b5c4acabd5c4c70ad_0.mp4'
+			
+		},
+		error: function (err){
+			layer.msg('获取数据失败')
+			console.log(err)
+		}
+	})
+}	
+</script>
+	</body>
+</html>

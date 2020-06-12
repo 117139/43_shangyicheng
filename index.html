@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+		<meta name="format-detection" content="email=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="keywords" content="尚亦城">
+		<meta name="Description" content="尚亦城">
+		<title>尚亦城</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style1.css" />
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/IPurl.js"></script>
+		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/layer/layer.js"></script>
+		<script src="js/video/TcPlayer-2.3.2.js" charset="utf-8"></script>
+		<style type="text/css">
+			.wrap {
+				/* max-width: 375px; */
+				max-width: 100%;
+				margin: 0 auto;
+				padding: 0;
+				background-color: #F7F7F7;
+			}
+
+			a {
+				display: block;
+				color: #333;
+			}
+
+			.ym_banner {
+				width: 100%;
+				/* height: 167px;pt */
+				padding-top: 44.5%;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+
+			.ym_main {
+				width: 100%;
+				padding: 0 4%;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+				background: #fff;
+			}
+
+			.ym_jj {
+				font-size: 13px;
+				font-weight: 400;
+				color: rgba(102, 102, 102, 1);
+				line-height: 24px;
+				padding: 16px 0 20px;
+				text-indent: 2em;
+			}
+
+			.zt_list {
+				width: 100%;
+				padding-bottom: 10px;
+				flex-wrap: wrap;
+			}
+
+			.zt_list>a {
+				width: 25%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				font-size: 12px;
+				color: #333;
+				padding-bottom: 10px;
+			}
+
+			.zt_list>a .kj_icon {
+				width: 40px;
+				height: 40px;
+				margin-bottom: 9px;
+				background: linear-gradient(179deg,rgba(7,86,173,1),rgba(37,130,235,1));
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				border-radius: 50%;
+			}
+
+			.hx20 {
+				width: 100%;
+				background: #f7f7f7;
+				height: 10px;
+			}
+
+			.list_tab {
+				width: 100%;
+				height: 45px;
+				border-bottom: 1px solid #eee;
+				display: flex;
+				align-items: stretch;
+				/* justify-content: space-between; */
+				padding: 0 4%;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+				background: #fff;
+				overflow-x: auto;
+			}
+
+			.list_tab1 {
+				white-space: nowrap;
+			}
+
+			.tab_li {
+				height: 44px;
+				display: inline-block;
+				align-items: center;
+				color: #999;
+				font-size: 14px;
+				line-height: 40px;
+				border-top: 5px solid rgba(0, 0, 0, 0);
+				border-bottom: 2px solid rgba(0, 0, 0, 0);
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+
+			.tab_li+.tab_li {
+				margin-left: 20px;
+			}
+
+			.tab_li.cur {
+				color: #01499D;
+				border-bottom: 2px solid #01499D;
+			}
+
+			.li_box {
+				width: 100%;
+				border-bottom: 1px solid #eee;
+				padding-bottom: 18px;
+			}
+
+			.li_tit {
+				width: 100%;
+				min-height: 54px;
+				padding: 13px 0;
+				font-size: 17px;
+				font-weight: 400;
+				color: rgba(51, 51, 51, 1);
+				display: flex;
+				align-items: center;
+				line-height: 20px;
+				box-sizing: border-box;
+			}
+
+			.li_img {
+				/* height: 206px; */
+				padding-top: 59.2%;
+				border-radius: 4px;
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				position: relative;
+				margin-bottom: 16px;
+			}
+
+			.li_video {
+				width: 48px;
+				height: 48px;
+				border-radius: 50%;
+				background-image: url(images/play.png);
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -24px;
+				margin-top: -24px;
+			}
+
+			.li_user {
+				font-size: 11px;
+				color: #666;
+			}
+
+			.li_user span+span {
+				margin-left: 11px;
+			}
+
+			.li_img_box {
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.li_img1 {
+				width: 32%;
+				/* height: 67px; */
+				padding-top: 20%;
+			}
+
+			.li_img1+.li_img1 {
+				margin-left: 1.5%;
+			}
+
+			.li_box_r {
+				padding-top: 17px;
+				display: flex;
+			}
+
+			.li_img2 {
+				margin-left: 10px;
+				margin-bottom: 1px;
+			}
+
+			.li_ad {
+				width: 100%;
+				padding: 24px 0 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- <div v-if="datas" id="body"  class="wrap" > -->
+		<div id="body" class="wrap">
+			<div class="ym_banner" :style="'background-image: url('+xq_data.topImage+');'"></div>
+			<div class="ym_main">
+				<div class="ym_jj" v-html="xq_data.desc">
+					尽管扎哈.哈迪德的设计一次又-次引起震撼，但不了解建筑 相关的读者或许还不够了解她的伟大。扎哈.
+					哈迪德被称作建筑界的‘“解构主义大师”，师从荷兰著名建筑师雷姆.库哈斯，作为建筑设计界少有的女性，站在金字塔的顶端，对整个行业的性别公平和理念推进都起到了相当深远的作用.
+				</div>
+				<div class="dis_flex aic  zt_list">
+					<a :href="item.type==2? item.content:'zt_xq.html?id='+item.content+'&token='+token" target="_blank" v-for="(item,index) in xq_data.quickList">
+						<!-- <img src="images/ztimg_05.png" alt=""> -->
+						<div class="kj_icon" :style="'background-image: url('+item.iconImg+');'"></div>
+						<span>{{item.name}}</span>
+					</a>
+					<!-- <a href="###" target="_blank">
+						<img src="images/ztimg_07.png" alt="">
+						<span>防疫科普知识</span>
+					</a>
+					<a href="###" target="_blank">
+						<img src="images/ztimg_09.png" alt="">
+						<span>北京空中课堂</span>
+					</a>
+					<a href="###" target="_blank">
+						<img src="images/ztimg_11.png" alt="">
+						<span>爱心求助通道</span>
+					</a> -->
+				</div>
+			</div>
+			<div class="hx20"></div>
+			<div class="list_tab">
+				<div class="list_tab1">
+					<div class="tab_li" :class="{'cur': classIndex==index}" @click="tab(index)" v-for="(item,index) in newClass">{{item.name}}</div>
+					<!-- <div class="tab_li" :class="{'cur': tab_cur==1}" @click="set_cur(1)">抗击肺炎</div>
+					<div class="tab_li" :class="{'cur': tab_cur==2}" @click="set_cur(2)">热点新闻</div>
+					<div class="tab_li" :class="{'cur': tab_cur==3}" @click="set_cur(3)">防控举措</div>
+					<div class="tab_li" :class="{'cur': tab_cur==4}" @click="set_cur(4)">防控举措</div> -->
+				</div>
+			</div>
+			<div class="ym_main">
+				<div v-if="list.length==0" class="zanwu">暂无数据</div>
+				<!-- 视屏 -->
+				<!-- <div v-else class="li_box" v-for="(item,index) in list">
+					<div class="li_box1">
+						<div class="li_tit">元宵佳节猜灯谜，全民战“疫”共闯关</div>
+						<div class="li_img" style="background-image: url(images/ztimg_18.jpg);">
+							<div class="li_video"></div>
+						</div>
+						<div class="li_user"><span>北京亦庄融资媒体中心</span><span>1小时前</span></div>
+					</div>
+				</div> -->
+				<!-- 一张图 -->
+				<div v-for="(item,index) in list" >
+					<div href="zt_xq.html" class="li_box"  @click="toInfo(item.id)">
+						<div class="li_box1" v-if="item.newShowType==1">
+							<div class="li_tit">{{item.title}}</div>
+							<div v-if="item.cover" class="li_img" :style="{backgroundImage: 'url('+item.cover+')'}">
+						
+							</div>
+							<div class="li_user"><span>{{item.source}}</span><span>{{item.showTimeStr}}</span></div>
+						</div>
+						<div class="li_box1" v-if="item.newShowType==2&&item.videoFileSize!=''">
+							<div class="li_tit">{{item.title}}</div>
+							<div class="li_img" :style="{backgroundImage: 'url('+item.cover+')'}">
+								<div class="li_video"></div>
+							</div>
+							<div class="li_user"><span>{{item.source}}</span><span>{{item.showTimeStr}}</span></div>
+						</div>
+						<div class="li_box1" v-if="item.newShowType==2&&item.videoFileSize==''">
+							<div class="li_tit">{{item.title}}</div>
+							<div class="li_img" :style="{backgroundImage: 'url('+item.cover+')'}">
+					
+							</div>
+							<div class="li_user"><span>{{item.source}}</span><span>{{item.showTimeStr}}</span></div>
+						</div>
+						<div class="li_box1" v-if="item.newShowType==3">
+							<div class="li_box_r">
+								<div class="flex_1 ">{{item.title}}2</div>
+								<div class="li_img li_img1 li_img2" :style="{backgroundImage: 'url('+item.cover+')'}"></div>
+							</div>
+							<div class="li_user"><span>{{item.source}}</span><span>{{item.showTimeStr}}</span></div>
+						</div>
+						<div class="li_box1" v-if="item.newShowType==4">
+							<div class="li_tit">{{item.title}}4</div>
+							<div class="li_img_box">
+								<div class="li_img li_img1" v-for="(item1,index1) in getPic(item.cover)" v-if="index1 <3" :style="{backgroundImage: 'url('+item1+')'}"></div>
+								<!-- <div class="li_img li_img1" style="background-image: url(images/ztimg_25.jpg);"></div>
+								<div class="li_img li_img1" style="background-image: url(images/ztimg_27.jpg);"></div> -->
+							</div>
+							<div class="li_user"><span>{{item.source}}</span><span>{{item.showTimeStr}}</span></div>
+						</div>
+					</div>
+					<!-- {{(index+1)%4}}
+					{{(index+1)/4-1}} -->
+					<a v-if="(index+1)%4==0&&(index+1)/4<=list_ad.length" :href="list_ad[(index+1)/4-1].url" target="_blank" class="li_ad" >
+						<div class="li_img" :style="{backgroundImage: 'url('+list_ad[(index+1)/4-1].advertCover+')'}"></div>
+					</a>
+				</div>
+				
+				<!-- 三张图 -->
+				<!-- <a href="zt_xq.html" class="li_box">
+					<div class="li_box1">
+						<div class="li_tit">农村俗话说：“五树进宅子，人穷佳败”是什 么意思呢？</div>
+						<div class="li_img_box">
+							<div class="li_img li_img1" style="background-image: url(images/ztimg_23.jpg);"></div>
+							<div class="li_img li_img1" style="background-image: url(images/ztimg_25.jpg);"></div>
+							<div class="li_img li_img1" style="background-image: url(images/ztimg_27.jpg);"></div>
+						</div>
+						<div class="li_user"><span>北京亦庄融资媒体中心</span><span>1小时前</span></div>
+					</div>
+				</a> -->
+				<!-- 右图 -->
+				<!-- <a href="zt_xq.html" class="li_box">
+					<div class="li_box1">
+						<div class="li_box_r">
+							<div class="flex_1 ">农村俗话说：“五树进宅子人穷佳败”是什意思呢？</div>
+							<div class="li_img li_img1 li_img2" style="background-image: url(images/ztimg_27.jpg);"></div>
+						</div>
+						<div class="li_user"><span>北京亦庄融资媒体中心</span><span>1小时前</span></div>
+					</div>
+				</a> -->
+				
+			</div>
+			<div v-show="datas.videoPath" class="sp_box">
+				<!-- <div class="dis_flex aic ju_c sp_zcz" @click="play111(this,datas.videoPath)"><img src="images/play.png" alt=""></div> -->
+				<div id="H_video"></div>
+
+			</div>
+
+			<!-- <div class="bottombox"  :style="{backgroundColor: datas.backgroupColor }">
+				<div v-if="getNowCanshu().isapp!='true'&&getNowCanshu().isapp!=true" class="footer_btn dis_flex" style="color: #F29B76;"  onclick="goapp()">进入尚亦城APP</div>
+				<div v-else class="footer_btn dis_flex"  @click="baoming()">去征集</div>
+			</div> -->
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: "#body",
+				data: {
+					xq_data: JSON.parse(sessionStorage.getItem('xq_data')) || {}, //详情
+					list_ad:JSON.parse(sessionStorage.getItem('list_ad')) || [],
+					tab_cur: 0,
+					datas: '',
+					newClass: JSON.parse(sessionStorage.getItem('newClass')) || [],
+					list: JSON.parse(sessionStorage.getItem('list')) || [],
+					lists: JSON.parse(sessionStorage.getItem('lists')) || [],
+					classIndex: sessionStorage.getItem('classIndex') || 0,
+					classId: sessionStorage.getItem('classId') || '',
+					pageSize: 8,
+					pageIndex: JSON.parse(sessionStorage.getItem('pageIndex')) || 1,
+					isEnd: JSON.parse(sessionStorage.getItem('isEnd')) || false, // 是否有更多
+					isNav: false,
+					token: getUrlParam().token || '',
+					isIos: isIos()
+				},
+				created: function() {
+					// if(!getNowCanshu().activityId){
+					// 	layer.msg('缺少活动参数')
+					// 	return
+					// }
+					// if(getNowCanshu().type){
+					// 	this.type=getNowCanshu().type
+					// }
+
+					// getdata()
+				},
+				methods: {
+					getPicNum: function(picStr) {
+						if (picStr) {
+							return picStr.split(',').length;
+						} else {
+							return 0;
+						}
+					},
+					getPic: function(picStr) {
+						return picStr.split(',');
+					},
+					tab: function(index) {
+						if (vm.classIndex != index) {
+							vm.classIndex = index;
+							vm.classId = vm.newClass[vm.classIndex].id;
+							vm.pageIndex = 0;
+							vm.list = [];
+							vm.lists = [];
+							getNewsList();
+							sessionStorage.setItem('classIndex', index);
+							sessionStorage.setItem('isEnd', false);
+						};
+					},
+					toInfo: function(id) {
+						if (getUrlParam().token) {
+							window.location.href = 'zt_xq.html?id=' + id + '&token=' + getUrlParam().token;
+						} else {
+							window.location.href = 'zt_xq.html?id=' + id;
+						}
+
+					},
+				}
+			});
+
+			function set_cur(num) {
+				if (vm.tab_cur == num) {
+					return
+				}
+
+				vm.tab_cur = num
+			}
+
+			function goapp() {
+				submitFn('zhengji.html?isapp=true&activityId=' + getNowCanshu().activityId)
+			}
+
+			function initClass() {
+
+				navOffset = $(".header_box").height();
+				$(window).scroll(function() {
+					var a = $(this).scrollTop();
+					sessionStorage.setItem('scrollTop', a);
+					if (a >= navOffset) {
+						vm.isNav = true;
+					} else {
+						vm.isNav = false;
+					}
+				});
+			};
+
+			function getClassData() { //获取详情
+				$.showLoading();
+				var datas = {};
+				// var datas = { "apipage": "lt_news", "op": "totallist", "pageindex": 1, "pagesize": pagesize, "type": 2 };
+				$.ajax({
+					url: IPurl + '/app/special/getSpecialDetail?specialId=' + (getUrlParam().specialId ? getUrlParam().specialId :
+						''),
+					// url: IPurl + '/app/myColumn/getAllUserColumn?nav=front&showType=app&sessionId=' + (getUrlParam().token ? getUrlParam().token : ''),
+					type: 'get',
+					data: datas,
+					timeout: '60000',
+					success: function(ret) {
+						$(document.body).pullToRefreshDone();
+						// var ret = JSON.parse(data);
+						if (ret.code == 200) {
+							vm.newClass = ret.data.typeList;
+							vm.xq_data = ret.data;
+							sessionStorage.setItem('newClass', JSON.stringify(ret.data.typeList));
+							sessionStorage.setItem('xq_data', JSON.stringify(ret.data));
+							if (ret.data.typeList.length) {
+								vm.$nextTick(function() {
+									vm.classId = ret.data.typeList[0].id;
+									getNewsList();
+									getad()
+									setTimeout(function() {
+										initClass();
+									}, 1000);
+								});
+							} else {
+								// $.alert('暂无分类')
+							}
+
+						} else {
+
+						}
+						$.hideLoading();
+					},
+					error: function(err) {
+						$(document.body).pullToRefreshDone();
+						$.hideLoading();
+						$.alert("服务器走丢了!");
+					}
+				});
+			};
+
+			function getNewsList() { //获取新闻列表classId
+				$.showLoading();
+				sessionStorage.setItem('classId', vm.classId);
+				var datas = {
+					"condition": {
+						"columnId": vm.classId
+					},
+					"rowCount": vm.pageSize,
+					"startRow": vm.pageIndex
+				};
+				console.log(JSON.stringify(datas))
+				$.ajax({
+					url: IPurl + '/app/special/getSpecialNewsList',
+					type: 'post',
+					headers: {
+						'Content-Type': 'application/json;charset=utf-8',
+					},
+					data: JSON.stringify(datas),
+					timeout: '60000',
+					success: function(ret) {
+						$(document.body).pullToRefreshDone();
+						// var ret = JSON.parse(data);
+						if (ret.code == 200) {
+							if (ret.data.stickNews) {
+								vm.lists = ret.data.stickNews;
+								sessionStorage.setItem('lists', JSON.stringify(ret.data.stickNews));
+							};
+							if (ret.data.newsPoList) {
+								if(vm.pageIndex==1){
+									vm.list = ret.data.newsPoList
+								}else{
+									vm.list = vm.list.concat(ret.data.newsPoList);
+									
+								}
+								
+								console.log(vm.list)
+								sessionStorage.setItem('list', JSON.stringify(vm.list));
+								if (ret.data.newsPoList.length == vm.pageSize) {
+									vm.pageIndex = vm.pageIndex + 10;
+									vm.isEnd = false;
+								} else {
+									vm.isEnd = true;
+								};
+								sessionStorage.setItem('pageIndex', vm.pageIndex);
+								sessionStorage.setItem('isEnd', vm.isEnd);
+							} else {
+								vm.isEnd = true
+								sessionStorage.setItem('isEnd', true);
+							}
+
+						} else {
+
+						};
+						$.hideLoading();
+						loading = false;
+					},
+					error: function(err) {
+						$(document.body).pullToRefreshDone();
+						loading = false;
+						$.hideLoading();
+						$.alert("服务器走丢了!");
+					}
+				});
+			};
+
+
+
+			function getad() { //评论
+			 //    var datas = { "condition": { "contentId": getUrlParam().id }, "rowCount": 1000, "startRow": 1 }
+				// console.log(JSON.stringify(datas))
+			    $.showLoading();
+			    $.ajax({
+			        url: IPurl + '/app/anno/getAdvertList?positionType=2',
+			        type: 'get',
+			        data: {},
+			        headers: {
+			            'Content-Type': 'application/json',
+			        },
+			        timeout: '60000',
+			        success: function(ret) {
+			            closeBMark();
+			            // var ret = JSON.parse(data);
+			            if (ret.code == 200) {
+			                vm.list_ad = ret.data;
+							sessionStorage.setItem('list_ad', JSON.stringify(ret.data));
+			            }
+			            $.hideLoading();
+			            vm.isloadsuccess = true;
+			
+			        },
+			        error: function(err) {
+			            closeBMark()
+			            $(document.body).pullToRefreshDone();
+			            vm.isloadsuccess = true;
+			            $.hideLoading();
+			            layer.msg("服务器走丢了!");
+			        }
+			    });
+			};
+				
+				
+			console.log(JSON.parse(sessionStorage.getItem('newClass')))
+			if (JSON.parse(sessionStorage.getItem('newClass'))) {
+			    setTimeout(function() {
+			        // initClass();
+			        $(window).scrollTop(sessionStorage.getItem('scrollTop') || 0);
+			        closeBMark();
+			    }, 200);
+			} else {
+			getClassData();
+			}
+			var loading = false; //状态标记
+			$(document.body).infinite().on("infinite", function() {
+				setTimeout(function() {
+					// console.log('end=' + vm.isEnd + '---' + 'load=' + loading)
+					if (loading || vm.isEnd) return;
+					loading = true;
+					getNewsList();
+				}, 200)
+
+
+			});
+			// 判断设备为 ios
+			function isIos() {
+				var u = navigator.userAgent;
+				if (u.indexOf("iPhone") > -1 || u.indexOf("iOS") > -1) {
+					return true;
+				}
+				return false;
+			}
+		</script>
+	</body>
+</html>

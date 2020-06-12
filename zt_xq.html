@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+		<meta name="format-detection" content="email=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="keywords" content="尚亦城">
+		<meta name="Description" content="尚亦城">
+		<title>尚亦城</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" href="css/jquery-weui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style1.css" />
+		<link rel="stylesheet" href="share/video/video-js.css">
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-weui.min.js"></script>
+		<script type="text/javascript" src="js/IPurl.js"></script>
+		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/layer/layer.js"></script>
+		<!-- <script src="js/video/TcPlayer-2.3.2.js" charset="utf-8"></script> -->
+		<script src="share/video/video.mini.js"></script>
+		<script src="share/video/videojs-contrib-hls.js"></script>
+		<style type="text/css">
+			.wrap {
+				/* max-width: 375px; */
+				max-width: 100%;
+				margin: 0 auto;
+				padding: 0 0 70px;
+				background-color: #F7F7F7;
+			}
+
+			.ym_banner {
+				width: 100%;
+				height: 167px;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+
+			.ym_main {
+				width: 100%;
+				padding: 0 4%;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+				background: #fff;
+			}
+
+			.ym_jj {
+				font-size: 13px;
+				font-weight: 400;
+				color: rgba(102, 102, 102, 1);
+				line-height: 24px;
+				padding: 16px 0 20px;
+				text-indent: 2em;
+			}
+
+			.zt_list {
+				width: 100%;
+				padding-bottom: 20px;
+			}
+
+			.zt_list>a {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				font-size: 12px;
+				color: #333;
+			}
+
+			.zt_list>a img {
+				width: 40px;
+				height: 40px;
+				margin-bottom: 9px;
+			}
+
+			.hx20 {
+				width: 100%;
+				background: #f7f7f7;
+				height: 10px;
+			}
+
+			.list_tab {
+				width: 100%;
+				height: 45px;
+				border-bottom: 1px solid #eee;
+				display: flex;
+				align-items: stretch;
+				justify-content: space-between;
+				padding: 0 4%;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+				background: #fff;
+			}
+
+			.tab_li {
+				display: flex;
+				align-items: center;
+				color: #999;
+				font-size: 14px;
+				border-top: 5px solid rgba(0, 0, 0, 0);
+				border-bottom: 2px solid rgba(0, 0, 0, 0);
+			}
+
+			.tab_li.cur {
+				color: #01499D;
+				border-bottom: 2px solid #01499D;
+			}
+
+			.li_box {
+				width: 100%;
+				border-bottom: 1px solid #eee;
+				padding-bottom: 18px;
+			}
+
+			.li_tit {
+				width: 100%;
+				min-height: 54px;
+				padding: 13px 0;
+				font-size: 17px;
+				font-weight: 400;
+				color: rgba(51, 51, 51, 1);
+				display: flex;
+				align-items: center;
+				line-height: 20px;
+				box-sizing: border-box;
+			}
+
+			.li_img {
+				height: 206px;
+				border-radius: 4px;
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				position: relative;
+				margin-bottom: 16px;
+			}
+
+			.li_video {
+				width: 48px;
+				height: 48px;
+				border-radius: 50%;
+				background-image: url(images/play.png);
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -24px;
+				margin-top: -24px;
+			}
+
+			.li_user {
+				font-size: 11px;
+				color: #666;
+			}
+
+			.li_user span+span {
+				margin-left: 11px;
+			}
+
+			.li_img_box {
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.li_img1 {
+				width: 32%;
+				height: 67px;
+			}
+
+			.li_img1+.li_img1 {
+				margin-left: 1.5%;
+			}
+
+			.li_box_r {
+				padding-top: 17px;
+				display: flex;
+			}
+
+			.li_img2 {
+				margin-left: 10px;
+				margin-bottom: 1px;
+			}
+
+			.li_ad {
+				width: 100%;
+				padding: 24px 0 20px;
+				font-size: 16px;
+				font-weight: 400;
+				color: rgba(51, 51, 51, 1);
+				line-height: 24px;
+			}
+
+			.li_ad img {
+				max-width: 100%;
+			}
+
+			.pl_box {
+				width: 100%;
+				background: #fff;
+				padding-top: 20px;
+			}
+
+			.pl_tit {
+				font-size: 16px;
+				color: #333;
+				padding: 15px 4%;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+
+			.pl_list {
+				width: 100%;
+			}
+
+			.pl_li {
+				width: 100%;
+				display: flex;
+				padding: 15px 4%;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+				border-bottom: 1px solid #eee;
+			}
+
+			.pl_tx {
+				width: 35px;
+				height: 35px;
+				border-radius: 50%;
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				margin-right: 13px;
+			}
+
+			.pl_r {}
+
+			.pl_uname {
+				font-size: 13px;
+				color: #09499A;
+				padding-top: 5px;
+				margin-bottom: 10px;
+			}
+
+			.pl_msg {
+				font-size: 15px;
+				color: #333;
+				line-height: 22px;
+				margin-bottom: 10px;
+			}
+
+			.pl_cz {
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.pl_time {
+				font-size: 12px;
+				color: #999;
+			}
+
+			.pl_dz {
+				font-size: 12px;
+				color: #999;
+				font-weight: bold;
+			}
+
+			.iconzanpress {
+				font-size: 11px;
+			}
+
+			.pl_dz.cur {
+				color: #09499A;
+			}
+
+			.b_box_b {
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				background: #fff;
+				height: 50px;
+				display: flex;
+				padding: 0 4%;
+				align-items: center;
+				box-sizing: border-box;
+				border-top: 1px solid #F6F6F6;
+			}
+
+			.b_box_b input {
+				height: 35px;
+				background: rgba(249, 249, 249, 1);
+				border: 2px solid rgba(215, 215, 215, 1);
+				border-radius: 35px;
+				font-size: 16px;
+				color: #cbcbcb;
+				padding: 0 10px;
+				box-sizing: border-box;
+				min-width: 0;
+			}
+
+			.pl_btn {
+				width: 20px;
+				height: 20px;
+				margin-left: 20px;
+				position: relative;
+			}
+			.pl_btn img{
+				position: absolute;
+				top: 0;
+				z-index: 9;
+				width: 20px;
+			}
+			.pl_btn div{
+				position: absolute;
+				    background: #d85742;
+				    display: inline-block;
+				    color: #fff;
+				    font-size: 12px;
+				    border-radius: 50%;
+				    text-align: center;
+				    line-height: 24px;
+				    transform: scale3d(.8, .8, 1);
+				    width: 24px;
+				    height: 24px;
+				    top: -10px;
+				    right: -13px;
+				
+			}
+			
+			.submit {
+			    margin-left: 20px;
+			}
+			
+			.submit button {
+			    width: 50px;
+			    height: 30px;
+			    color: #fff;
+			    background: #00499d;
+			}
+			.news-content {
+			    padding: 0;
+			    word-wrap: break-word;
+			    border-top: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- <div v-if="datas" id="body"  class="wrap" > -->
+		<!-- http://appsycimg.ebda.cn:9002/201912121836076703/index.m3u8 -->
+		<div id="body" class="wrap">
+
+			<div class="ym_main">
+
+
+				<!-- 三张图 -->
+				<div class="li_box">
+					<div class="li_box1">
+						<div class="li_tit">{{info.title}}</div>
+						<div class="li_user"><span>{{info.source}}</span><span>{{info.delayTime}}</span></div>
+					</div>
+				</div>
+				<div class="li_ad news-content" v-html="info.content">
+					
+				</div>
+			</div>
+			<div class="hx20"></div>
+			<div class="pl_box">
+				<div class="pl_tit">全部评论</div>
+				<div class="pl_list">
+					<div class="zanwu" v-if="!Comment.length">暂无评论</div>
+					<div class="pl_li" v-for="(item,index) in Comment">
+						<div class="pl_tx" :style="{backgroundImage: 'url('+item.createUserCover+')'}"></div>
+						<div class="pl_r flex_1">
+							<div class="pl_uname">{{item.createUserName}}</div>
+							<div class="pl_msg">{{item.content}}</div>
+							<div class="pl_cz">
+								<div class="pl_time">{{item.showTimeStr}}</div>
+								<div class="pl_dz" @click="dz(1)">
+									<span class="iconfont iconzanpress"></span> <span>{{item.praiseNum}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="b_box_b"  v-if="token">
+				<input class="flex_1" type="text" placeholder="评论..." v-model="commentStr" @focus="intype=true" @blur="intype=false">
+				
+				<div class="pl_btn">
+					<img src="images/pl1.png" alt="">
+					<div class="pl_num" v-if="Comment.length">{{Comment.length}}</div>
+				</div>
+				<img v-if="!intype" class="pl_btn" src="images/pl2.png" alt="" onclick="shoucang()">
+				<div v-if="intype" onclick="submit();" class="submit"><button type="button">确定</button></div>
+				<!-- <img class="pl_btn" src="images/pl3.png" alt=""> -->
+			</div>
+		</div>
+		<script type="text/javascript">
+			var a = getUrlParam() || '';
+			covers = "images/vlinksoftplay.png";
+			var videoObj = {},
+			numCount = 0; //初始化视频对象
+			var vm = new Vue({
+				el: "#body",
+				data: {
+					intype:false,
+					info: '',
+					Comment: [],
+					commentStr: "",
+					token: a.token
+				},
+				created: function() {
+					// if(!getNowCanshu().activityId){
+					// 	layer.msg('缺少活动参数')
+					// 	return
+					// }
+					// if(getNowCanshu().type){
+					// 	this.type=getNowCanshu().type
+					// }
+
+					// getdata()
+				},
+				methods: {
+					getPicNum: function(picStr) {
+						if (picStr) {
+							return picStr.split(',').length;
+						} else {
+							return 0;
+						}
+					},
+					getPic: function(picStr) {
+						return picStr.split(',');
+					},
+				},
+				updated: function() {
+				        closeBMark()
+				    }
+			});
+
+			function dz(num) {
+				// layer.msg('点赞' + num)
+			}
+
+			getNewsList();
+			
+			function getNewsList() { //获取新闻列表
+			    $.showLoading();
+			    $.ajax({
+			        url: IPurl + '/app/api/news/getNewsInfo?newsId=' + getUrlParam().id,
+			        type: 'get',
+			        headers: {
+			            'Content-Type': 'application/json',
+			        },
+			        timeout: '60000',
+			        success: function(ret) {
+						console.log(ret.id)
+			            // var ret = JSON.parse(data);
+			            // if (ret.code == 200) {
+			            vm.info = ret;
+						console.log(vm.info)
+			            getComment();
+			            // } else {
+			
+			            // };
+			            $.hideLoading();
+			            vm.isloadsuccess = true;
+			            // portal.initVideo();
+			        },
+			        error: function(err) {
+			            $(document.body).pullToRefreshDone();
+			            vm.isloadsuccess = true;
+			            $.hideLoading();
+			            layer.msg("服务器走丢了!");
+			        }
+			    });
+			};
+			
+			function getComment() { //评论
+			    var datas = { "condition": { "contentId": getUrlParam().id }, "rowCount": 1000, "startRow": 1 }
+				console.log(JSON.stringify(datas))
+			    $.showLoading();
+			    $.ajax({
+			        url: IPurl + '/app/comment/getAllCommentById',
+			        type: 'post',
+			        data: JSON.stringify(datas),
+			        headers: {
+			            'Content-Type': 'application/json',
+			        },
+			        timeout: '60000',
+			        success: function(ret) {
+			            closeBMark();
+			            // var ret = JSON.parse(data);
+			            if (ret.code == 200) {
+			                vm.Comment = ret.data.commentData.datas;
+			            }
+			            $.hideLoading();
+			            vm.isloadsuccess = true;
+			
+			        },
+			        error: function(err) {
+			            closeBMark()
+			            $(document.body).pullToRefreshDone();
+			            vm.isloadsuccess = true;
+			            $.hideLoading();
+			            layer.msg("服务器走丢了!");
+			        }
+			    });
+			};
+			
+			function submit() { //提交评论
+			    if (!vm.commentStr) {
+			        return;
+			    };
+			    var datas = { "content": vm.commentStr, "contentId": getUrlParam().id, "deviceType": "", "module": "news", "sessionId": getUrlParam().token }
+			    $.showLoading();
+				console.log(JSON.stringify(datas))
+			    $.ajax({
+			        url: IPurl + '/app/comment/insertComment',
+			        type: 'post',
+			        data: JSON.stringify(datas),
+			        headers: {
+			            'Content-Type': 'application/json',
+			        },
+			        timeout: '60000',
+			        success: function(ret) {
+			            closeBMark();
+			            $.hideLoading();
+			            vm.commentStr = '';
+			            if (ret.code == 200) {
+			                layer.msg('等待审核')
+			            } else {
+			                layer.msg("评论失败");
+			            }
+			        },
+			        error: function(err) {
+			            $.hideLoading();
+			            layer.msg("服务器走丢了!");
+			        }
+			    });
+			};
+			
+			
+			function shoucang() { //收藏
+			    
+				/*{
+				  "collectionTitle": "string",
+				  "collectionUser": "string",
+				  "contentId": "string",
+				  "createDate": "2020-06-06T11:24:48.399Z",
+				  "extis": true,
+				  "id": "string",
+				  "module": "string",
+				  "sessionId": "10acae74-4b08-4b27-89cc-dfbddaf3351c"
+				}*/
+			    var datas = { "contentId": getUrlParam().id, "extis": "true", "module": "news", "sessionId": getUrlParam().token }
+			    $.showLoading();
+				console.log(JSON.stringify(datas))
+			    $.ajax({
+			        url: IPurl + '/app/collection/insertCollection',
+			        type: 'post',
+			        data: JSON.stringify(datas),
+			        headers: {
+			            'Content-Type': 'application/json',
+			        },
+			        timeout: '60000',
+			        success: function(ret) {
+			            closeBMark();
+			            $.hideLoading();
+			            vm.commentStr = '';
+			            if (ret.code == 200) {
+			                layer.msg('收藏成功')
+			            } else {
+			                layer.msg("操作失败");
+			            }
+			        },
+			        error: function(err) {
+			            $.hideLoading();
+			            layer.msg("服务器走丢了!");
+			        }
+			    });
+			};
+			
+			
+			var portal = {
+			    init: function() {
+			        var type = this.GetQueryString("type");
+			        //initWX(type);
+			        newsId = this.GetQueryString("newsId");
+			        sessionId = this.GetQueryString("sessionId");
+			        isWifi = this.GetQueryString("isWifi");
+			        this.initNews(type);
+			        this.initContent();
+			    },
+			
+			    initContent: function() {
+			        var type = this.GetQueryString("type");
+			        if (type === 'share') {
+			            $(".downloadAppDiv").show();
+			            $(".openApp").show();
+			            $("#topDiv").show();
+			            $(".downloadAppDiv").css("display", "block");
+			            $(".openApp").css("display", "flex");
+			            $("#topDiv").css("display", "block");
+			        } else {
+			            $(".downloadAppDiv").hide();
+			            $(".openApp").hide();
+			            $("#topDiv").hide();
+			
+			            $(".downloadAppDiv").css("display", "none")
+			            $(".openApp").css("display", "none")
+			            $("#topDiv").css("display", "none")
+			
+			        }
+			        $(".vjs-has-started").removeClass("vjs-has-started");
+			        $(".vjs-loading-spinner").remove();
+			        $(".vjs-control-bar").remove();
+			        $("video").prop("webkit-playsinline", "true");
+			        $("video").prop("playsinline", "playsinline");
+			        $("video").removeProp("src");
+			        $(".vjs-loading-spinner").remove();
+			        $(".vjs-fullscreen-control").remove();
+			    },
+			    initVideo: function() {
+			        this.initContent();
+			        var options = {
+			            bigPlayButton: false,
+			            textTrackDisplay: false,
+			            posterImage: true,
+			            errorDisplay: false,
+			            controlBar: true,
+			            autoplay: false,
+			            muted: false,
+			            fluid: false, //Video.js播放器将具有流畅的大小。换句话说，它将扩展以适应其容器。
+			            //                playbackRates: [0.5, 1, 1.5, 2],
+			            fullscreenToggle: false,
+			            nativeControlsForTouch: false, //只有技术支持Html5，此选项可以设置true为强制触摸设备的本机控件。
+			            nativeAudioTracks: false, //可以设置为false禁用本机音轨支持。最常用于videojs-contrib-hls。
+			            nativeVideoTracks: false, //可以设置为false禁用本机视频轨道支持。最常用于videojs-contrib-hls。
+			            controls: true, //是否拥有控制条，
+			            poster: covers, //默认背景,
+			            preload: "auto", //预加载，auto-自动    metadata-元数据信息 ，比如视频长度，尺寸等 。none-不预加载任何数据，直到用户开始播放才开始下载
+			            techOrder: ['html5']
+			        };
+			
+			        $("video", $(".news-content")).each(function(index, item) {
+			            videoObj[index] = videojs(item, options, function onPlayerReady() {
+			                videojs.log('Your player is ready!');
+			                // In this context, `this` is the player that was created by Video.js.
+			                //                     this.play();
+			                // How about an event listener?
+			                this.on('ended', function() {
+			                    videojs.log('Awww...over so soon?!');
+			                });
+			                this.on('play', function(e) {
+			                    $(".no-wifi-tip-" + $(e.target).find(".tip-text-div-video").attr("data-id")).hide();
+			                });
+			            });
+			            numCount = index;
+			            portal.createMask(item, videoObj[index]);
+			
+			
+			        });
+			
+			
+			
+			    },
+			    createMask: function(videoEle, videoObjs) {
+			        var srt = '<div class="no-wifi-tip no-wifi-tip-' + numCount + '">\
+			               <div id="tip-text" class="tip-text tip-text-div-video" data-id="' + numCount + '">继续播放需要消耗' + fileSize + '流量</div>\
+			         </div>';
+			        $(videoEle).parent().append(srt);
+			        if (isWifi == 1) {
+			            if (numCount == 0) {
+			                videoObjs.play();
+			            }
+			        } else {
+			            $(".no-wifi-tip").show();
+			            $(".tip-text").on("click", function(e) {
+			                var _index = $(e.target).attr("data-id");
+			                videoObj[_index].play(_index);
+			
+			                //                    videoObjs.play();
+			            })
+			
+			        }
+			    },
+			    initNews: function(type) {
+			        var _this = this;
+			        $.ajax({
+			            type: "get",
+			            url: IPurl + "/app/api/news/getNewsInfo?newsId=" + getUrlParam().id,
+			            async: false,
+			            dataType: "json",
+			            success: function(data) {
+			                if (data != null) {
+			                    if (data.title == null && data.content == null) {
+			                        //TODO数据丢失处理情况
+			                        $(".news-body").hide();
+			                        $(".Nodata").show();
+			                        return;
+			
+			                    } else {
+			                        $(".news-body").show();
+			                        $(".Nodata").hide();
+			                        //显示新闻标题
+			                        $('.news-title').html(data.title);
+			                        $("title").html(data.title);
+			                        $(".news-content").html(data.content)
+			                        $(".news-title2").html(data.title);
+			
+			
+			                        var title = data.title;
+			                        var cover = null;
+			                        if (data.cover.indexOf(",") > 0) {
+			                            cover = data.cover.split(",")[0];
+			                        } else {
+			                            cover = data.cover;
+			                        }
+			                        if (cover == null) {
+			                            cover = "./share/img/downLOGO.png";
+			                        }
+			                        $("#openAlogo").attr("src", cover);
+			                        //显示时间
+			                        var time = data.publishTime.substring(0, data.publishTime.indexOf(' '));
+			                        $('.news-source').html(data.source + "&nbsp;&nbsp;" + time);
+			
+			                        fileSize = data.videoFileSize;
+			                        if (type == "share") {
+			                            var url = window.location.href.split('#')[0];
+			                            // alert(encodeURIComponent(url));
+			                            var param = {
+			                                url: url
+			                            }
+			                            $.ajax({
+			                                url: "/app/WXShare/permissionValidation",
+			                                data: param,
+			                                type: "post",
+			                                dataType: "json",
+			                                success: function(data) {
+			                                    wx.config({
+			                                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+			                                        appId: data.data.appid, // 必填，公众号的唯一标识
+			                                        timestamp: data.data.timestamp, // 必填，生成签名的时间戳
+			                                        nonceStr: data.data.nonceStr, // 必填，生成签名的随机串
+			                                        signature: data.data.signature, // 必填，签名，见附录1
+			                                        jsApiList: ["updateAppMessageShareData", "updateTimelineShareData"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+			                                    });
+			                                    wx.ready(function() {
+			                                        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+			                                        wx.updateAppMessageShareData({
+			                                            title: title, // 分享标题
+			                                            desc: title, // 分享描述
+			                                            link: url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+			                                            imgUrl: cover, // 分享图标
+			                                            success: function() {}
+			                                        });
+			                                        wx.updateTimelineShareData({
+			                                            title: title, // 分享标题
+			                                            link: url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+			                                            imgUrl: cover, // 分享图标
+			                                            success: function() {
+			
+			                                            }
+			                                        });
+			                                    });
+			                                    wx.error(function() {
+			                                        //alert("微信验证失败！");
+			                                    });
+			                                }
+			                            });
+			
+			                        }
+			
+			                    }
+			                }
+			
+			            },
+			            error: function(xhr, type, errorThrown) {
+			                console.log('请求新闻内容失败')
+			            }
+			        });
+			    },
+			
+			    isWifi: function() { //安卓获取网络类型
+			
+			        var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection || { tyep: 'unknown' };
+			        var type_text = ['unknown', 'ethernet', 'wifi', '2g', '3g', '4g', 'none'];
+			        if (typeof(connection.type) == "number") {
+			            connection.type_text = type_text[connection.type];
+			        } else {
+			            connection.type_text = connection.type;
+			        }
+			        if (typeof(connection.bandwidth) == "number") {
+			            if (connection.bandwidth > 10) {
+			                connection.type = 'wifi';
+			            } else if (connection.bandwidth > 2) {
+			                connection.type = '3g';
+			            } else if (connection.bandwidth > 0) {
+			                connection.type = '2g';
+			            } else if (connection.bandwidth == 0) {
+			                connection.type = 'none';
+			            } else {
+			                connection.type = 'unknown';
+			            }
+			        }
+			
+			        return connection.type_text == "wifi" ? true : false;
+			    },
+			    isIos: function() { //检测手机系统类型
+			        var u = navigator.userAgent;
+			        if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) { //安卓手机
+			            return false;
+			        } else if (u.indexOf('iPhone') > -1) { //苹果手机
+			            return true;
+			        } else if (u.indexOf('Windows Phone') > -1) { //winphone手机
+			            return false;
+			        }
+			    },
+			    GetQueryString: function(name) {
+			        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			        var r = window.location.search.substr(1).match(reg);
+			        if (r != null) return unescape(r[2]);
+			        return null;
+			    }
+			}
+			
+			var css = [
+			
+			    "share/mui.min.css",
+			    "share/video/video-js.css",
+			    "share/main.css",
+			    //        "./share/edit/content.css?num=2",
+			    //        "./share/edit/copyformatting.css?num=3",
+			    //        "./share/edit/tableselection.css?num=4",
+			
+			];
+			var js = [
+			    'share/jquery-1.11.3.min.js',
+			    'share/video/video.mini.js',
+			    'share/video/videojs-contrib-hls.js'
+			];
+			var loadPlugin = function() {
+			    // LazyLoad.css(css[2]);
+			    // LazyLoad.css(css[1]);
+			    // LazyLoad.css(css[0]);
+			    // LazyLoad.js(js[0], function() {
+			    //     portal.init();
+			    // });
+			    portal.init();
+			    portal.initVideo();
+			    // for (var i = 1; i < js.length; i++) {
+			    //     (function(index) {
+			    //         var curUrl = js[index];
+			
+			    //         LazyLoad.js(curUrl, function() {
+			    //             if (index == 0) {
+			
+			
+			    //             } else if (index == (js.length - 1)) {
+			    //                 portal.initVideo();
+			
+			    //             }
+			    //         });
+			    //     })(i)
+			
+			    // }
+			
+			}
+			window.onload = function() {
+			    setTimeout(function() {
+			        loadPlugin()
+			
+			    }, 10)
+			}
+		</script>
+	</body>
+</html>

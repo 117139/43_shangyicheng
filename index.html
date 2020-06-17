@@ -16,6 +16,8 @@
 		<script type="text/javascript" src="js/IPurl.js"></script>
 		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/layer/layer.js"></script>
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<script src="js/swiper.min.js"></script>
 		<script src="js/video/TcPlayer-2.3.2.js" charset="utf-8"></script>
 		<style type="text/css">
 			.wrap {
@@ -30,7 +32,25 @@
 				display: block;
 				color: #333;
 			}
-
+			.swiper_box {
+				width: 100%;
+				/* height: 2.84rem; */
+			}
+			
+			.swiper_box a {
+				display: block;
+				/* width: 100%;
+				height: 2.84rem; */
+				/* background-size: 100% 100%; */
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat;
+			
+			}
+			
+			.swiper-pagination-bullet-active {
+				background: #fff !important;
+			}
 			.ym_banner {
 				width: 100%;
 				/* height: 167px;pt */
@@ -48,13 +68,18 @@
 				box-sizing: border-box;
 				background: #fff;
 			}
-
+			.ym_title{
+				padding-top: 16px;
+				font-size: 22px;
+				color: #333;
+				background: #fff;
+			}
 			.ym_jj {
 				font-size: 13px;
 				font-weight: 400;
 				color: rgba(102, 102, 102, 1);
 				line-height: 24px;
-				padding: 16px 0 20px;
+				padding: 6px 0 20px;
 				text-indent: 2em;
 			}
 
@@ -222,8 +247,18 @@
 	<body>
 		<!-- <div v-if="datas" id="body"  class="wrap" > -->
 		<div id="body" class="wrap">
-			<div class="ym_banner" :style="'background-image: url('+xq_data.topImage+');'"></div>
+			<!-- <div class="ym_banner" :style="'background-image: url('+xq_data.topImage+');'"></div> -->
+			<div class="swiper-container swiper_box">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" v-for="(item,index) in xq_data.bannerList"><a class="ym_banner"
+					 :href="item.content" :style="'background-image: url('+item.cover+');'"></a></div>
+					<!-- <div class="swiper-slide"><a class="ym_banner" href="###" :style="'background-image: url('+xq_data.topImage+');'"></a></div>
+					<div class="swiper-slide"><a class="ym_banner" href="###" :style="'background-image: url('+xq_data.topImage+');'"></a></div> -->
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
 			<div class="ym_main">
+				<div class="ym_title" v-html="xq_data.title"></div>
 				<div class="ym_jj" v-html="xq_data.desc">
 					尽管扎哈.哈迪德的设计一次又-次引起震撼，但不了解建筑 相关的读者或许还不够了解她的伟大。扎哈.
 					哈迪德被称作建筑界的‘“解构主义大师”，师从荷兰著名建筑师雷姆.库哈斯，作为建筑设计界少有的女性，站在金字塔的顶端，对整个行业的性别公平和理念推进都起到了相当深远的作用.
@@ -354,6 +389,16 @@
 			</div> -->
 		</div>
 		<script type="text/javascript">
+			$(function (){
+				var mySwiper = new Swiper('.swiper-container', {
+					autoplay: false, //可选选项，自动滑动
+					loop:true,
+					// effect: 'fade',
+					pagination: {
+						el: '.swiper-pagination',
+					},
+				})
+			})
 			var vm = new Vue({
 				el: "#body",
 				data: {
